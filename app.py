@@ -2,7 +2,14 @@ import os
 import shutil
 
 def get_path():
-    return input('กรุณากรอกที่อยู่ของ XAMPP (เช่น C:\\xampp):').strip()
+     while True:
+        xampp_path = input('กรุณากรอกที่อยู่ของ XAMPP (เช่น C:\\xampp):').strip()
+        htdocs_path = os.path.join(xampp_path, 'htdocs')
+        if os.path.exists(htdocs_path) and os.path.isdir(htdocs_path):
+            print(f'พบโฟลเดอร์ htdocs ที่: {htdocs_path}')
+            return xampp_path
+        else:
+            print('ไม่พบโฟลเดอร์ htdocs ในที่อยู่ที่ระบุ กรุณาลองใหม่อีกครั้ง')
 
 def get_data(xampp_path):
     return os.path.join(xampp_path, 'mysql', 'data')
